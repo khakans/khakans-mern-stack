@@ -11,15 +11,20 @@ class Seller extends Component {
   };
 
   state = {
+    storeID: '',
     name: '',
     price: '',
     stock: '',
     items: []
   };
 
-  componentDidMount = () => {
-    this.getItem();
-  };
+  componentDidMount() {
+    fetch('/api/users/Item')
+    .then((response) => response.json())
+    .then(itemsList => {
+        this.setState({ items: itemsList.data });
+    });
+  }
 
   getItem = () => {
     axios.get('/api/users/Item')
@@ -42,6 +47,7 @@ class Seller extends Component {
     event.preventDefault();
 
     const payload = {
+      storeID: this.state.storeID,
       name: this.state.name,
       price: this.state.price,
       stock: this.state.stock,
@@ -73,10 +79,25 @@ class Seller extends Component {
 
   render() {
     const { user } = this.props.auth;
+    const { items } = this.state;
+    console.log(items);
 
     return (
       <div className="Seller">
         <div className="container">
+        <h5>Product List</h5>
+          {items.map((item, index) => (
+            <div key={index} className="card" style={{ width: "270px"}}>
+              <img className="card-img-top" src="http://placehold.it/270x270"/>
+              <div className="card-body">
+                <h4 className="card-title" style={{fontWeight: "bold"}}>{item.name}</h4>
+                <p className="card-text">Price : {item.price}</p>
+                <p className="card-text">Stock : {item.stock}</p>
+                <a href="#" className="btn btn-primary" style={{marginRight: "12px"}}>Edit Item</a>
+                <a href="#" className="btn btn-primary">Delete Item</a>
+              </div>
+            </div>
+          ))}
           <div className="floatName"><p><b>hii seller,</b> {user.name.split(" ")[0]}</p></div>
           <button className="floatLogout" onClick={this.onLogoutClick}>Logout</button>
           <button data-toggle="modal" data-target="#myModal" className="floatAdditem" style={{fontWeight:"bolder"}}>Add New Item</button>
@@ -94,6 +115,14 @@ class Seller extends Component {
                 {/* Modal body */}
                 <div className="modal-body">
                   <form onSubmit={this.submit}>
+                    <div hidden>
+                      <input 
+                        type="text"
+                        name="storeID"
+                        value={user.id}
+                        onChange={this.handleChange}
+                      />
+                    </div>
                     <div className="form-input">
                       <input 
                         type="text"
