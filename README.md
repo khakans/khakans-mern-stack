@@ -2,7 +2,7 @@
 
 # Introduction
 
-This repository is the result of the learn to develop my first MERN application
+This repository is the result of the learn to develop my first MERN application, and is still in learning and development to perfect its features.
 
 ## Depedencies
 
