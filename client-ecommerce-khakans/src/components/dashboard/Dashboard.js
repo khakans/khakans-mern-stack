@@ -10,55 +10,46 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      items: [],
-      isLoaded: false
-    };
+  
+  state = {
+    items: []
   }
 
-  componentDidMount = () => {
-    axios.get('/api/users/Item')
-      .then(response => {
-        this.setState({ isLoaded: true, items: response.data });
-        console.log('Data has been received!!');
+  componentDidMount() {
+      fetch('/api/users/Item')
+      .then((response) => response.json())
+      .then(itemsList => {
+          this.setState({ items: itemsList.data });
       });
-  };
-
-  displayItem = (items, isLoaded) => {
-    console.log(items);
-    if (!isLoaded){ 
-      return (<div style={{marginTop: "100px"}}>Loading data ... </div>)
-    }
-    return (items.map((item, index) =>
-      <div key={index}>
-        <h3>{item.name}</h3>
-        <p>{item.price}</p>
-        <p>{item.stock}</p>
-      </div>
-    ))
-  };
+  }
 
   render() {
-    // console.log('State: ', this.state);
     const { user } = this.props.auth;
+    const { items } = this.state;
+    console.log(items);
     
-    return (
-      <div className="home">
-        <div className="container">
-          <div className="floatName"><p><b>hii,</b> {user.name.split(" ")[0]}</p></div>
-          <button className="floatLogout" onClick={this.onLogoutClick}>Logout</button>
-          <button className="floatCart" style={{fontWeight:"bolder"}}>Cart</button>
-          <div>
-            {this.displayItem(this.state.items, this.state.isLoaded)}
-          </div>
-        </div>
+  return (
+    <div className="home">
+      <div className="container">
+        <h5>Product List</h5>
+          {items.map((item, index) => (
+            <div key={index} className="card" style={{ width: "300px"}}>
+              <img className="card-img-top" src="http://placehold.it/300x300"/>
+              <div className="card-body">
+                <h4 className="card-title" style={{fontWeight: "bold"}}>{item.name}</h4>
+                <p className="card-text">Price : {item.price}</p>
+                <p className="card-text">Stock : {item.stock}</p>
+                <a href="#" className="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          ))}
+        <div className="floatName"><p><b>hii,</b> {user.name.split(" ")[0]}</p></div>
+        <button className="floatLogout" onClick={this.onLogoutClick}>Logout</button>
+        <button className="floatCart" style={{fontWeight:"bolder"}}>Cart</button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+}}
 
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
