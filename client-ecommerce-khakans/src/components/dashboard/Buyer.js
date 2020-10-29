@@ -15,6 +15,9 @@ class Buyer extends Component {
     return (
       <div className="Seller">
         <div className="container">
+          <div className="jumbotron">
+            <h3>Hi, {user.name}</h3><br/>
+          </div>
           <div className="floatName"><p><b>hii buyer,</b> {user.name.split(" ")[0]}</p></div>
           <button className="floatLogout" onClick={this.onLogoutClick}>Logout</button>
           <button className="floatCart" style={{fontWeight:"bolder"}}>Cart</button>
