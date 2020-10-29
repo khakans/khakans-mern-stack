@@ -3,6 +3,7 @@
 # Introduction
 
 This repository is the result of the learn to develop my first MERN application, and is still in learning and development to perfect its features.
+This application needs improvement by adding some logic functions to make all features work. this will be my work in the future
 
 ## Depedencies
 
