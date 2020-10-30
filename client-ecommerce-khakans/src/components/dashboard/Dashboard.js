@@ -31,9 +31,11 @@ class Dashboard extends Component {
   return (
     <div className="home">
       <div className="container">
-        <h5>Product List</h5>
-          {items.map((item, index) => (
-            <div key={index} className="card" style={{ width: "300px"}}>
+        <div className="row">
+        {items.map((item, index) => (
+          <div key={index} className="col-xs-12 col-sm-6 col-md-3">
+            <div className="box">
+              <div className="card">
               <img className="card-img-top" src="http://placehold.it/300x300"/>
               <div className="card-body">
                 <h4 className="card-title" style={{fontWeight: "bold"}}>{item.name}</h4>
@@ -41,8 +43,11 @@ class Dashboard extends Component {
                 <p className="card-text">Stock : {item.stock}</p>
                 <a href="#" className="btn btn-primary">Add to Cart</a>
               </div>
+              </div>
             </div>
-          ))}
+          </div>
+        ))}
+        </div>
         <div className="floatName"><p><b>hii,</b> {user.name.split(" ")[0]}</p></div>
         <button className="floatLogout" onClick={this.onLogoutClick}>Logout</button>
         <button className="floatCart" style={{fontWeight:"bolder"}}>Cart</button>
