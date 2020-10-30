@@ -5,10 +5,10 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navigation">
-        <nav className="navbar navbar-expand-lg navbar-light bg-warning">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-warning">
           <div className="container">
-            <Link className="navbar-brand" to="/dashboard">
-              E-Commerce
+            <Link className="navbar-brand" style={{fontSize: 15, fontWeight: 700}} to="/dashboard">
+              E-COMMERCE
             </Link>
             <button
               className="navbar-toggler"
@@ -24,13 +24,13 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
                 <li>
-                  <Link className="nav-link" to="/seller">
-                    Seller  
+                  <Link className="nav-link" style={{fontSize: 15, fontWeight: 700}} to="/seller">
+                    MY STORE  
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-link" to="/buyer">
-                    Buyer
+                  <Link className="nav-link" style={{fontSize: 15, fontWeight: 700}} to="/buyer">
+                    MY ACCOUNT
                   </Link>
                 </li>
               </ul>
