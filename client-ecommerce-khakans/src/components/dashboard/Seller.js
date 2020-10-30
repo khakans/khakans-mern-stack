@@ -85,19 +85,24 @@ class Seller extends Component {
     return (
       <div className="Seller">
         <div className="container">
-        <h5>Product List</h5>
+          <div className="row">
           {items.map((item, index) => (
-            <div key={index} className="card" style={{ width: "270px"}}>
-              <img className="card-img-top" src="http://placehold.it/270x270"/>
-              <div className="card-body">
-                <h4 className="card-title" style={{fontWeight: "bold"}}>{item.name}</h4>
-                <p className="card-text">Price : {item.price}</p>
-                <p className="card-text">Stock : {item.stock}</p>
-                <a href="#" className="btn btn-primary" style={{marginRight: "12px"}}>Edit Item</a>
-                <a href="#" className="btn btn-primary">Delete Item</a>
+            <div key={index} className="col-xs-12 col-sm-6 col-md-3">
+              <div className="box">
+                <div className="card">
+                <img className="card-img-top" src="http://placehold.it/300x300"/>
+                <div className="card-body">
+                  <h4 className="card-title" style={{fontWeight: "bold"}}>{item.name}</h4>
+                  <p className="card-text">Price : {item.price}</p>
+                  <p className="card-text">Stock : {item.stock}</p>
+                  <a data-toggle="modal" data-target="#myModaledit" className="btn" style={{marginRight: "4px", fontSize: 11}}>Edit Item</a>
+                  <a href="#" className="btn bg-warning" style={{fontSize: 11}}>Delete Item</a>
+                </div>
+                </div>
               </div>
             </div>
           ))}
+          </div>
           <div className="floatName"><p><b>hii seller,</b> {user.name.split(" ")[0]}</p></div>
           <button className="floatLogout" onClick={this.onLogoutClick}>Logout</button>
           <button data-toggle="modal" data-target="#myModal" className="floatAdditem" style={{fontWeight:"bolder"}}>Add New Item</button>
@@ -109,7 +114,67 @@ class Seller extends Component {
               
                 {/* Modal Header */}
                 <div className="modal-header">
-                  <h5 className="modal-title">add new item below</h5>
+                  <h5 className="modal-title">Add new item below!</h5>
+                </div>
+                
+                {/* Modal body */}
+                <div className="modal-body">
+                  <form onSubmit={this.submit}>
+                    <div hidden>
+                      <input 
+                        type="text"
+                        name="storeID"
+                        value={user.name}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                    <div className="form-input">
+                      <input 
+                        type="text"
+                        name="name"
+                        placeholder="Name of Product"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                    <div className="form-input">
+                      <input 
+                        type="number"
+                        name="price"
+                        placeholder="Price"
+                        value={this.state.price}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                    <div className="form-input">
+                      <input 
+                        type="number"
+                        name="stock"
+                        placeholder="Stock"
+                        value={this.state.stock}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                    <button className="btn bg-success">Submit</button>
+                  </form>
+                </div>
+                
+                {/* Modal footer */}
+                <div className="modal-footer">
+                  <button type="button" className="btn bg-danger" data-dismiss="modal">Close</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div className="modal" id="myModaledit" style={{marginTop: "100px"}}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+              
+                {/* Modal Header */}
+                <div className="modal-header">
+                  <h5 className="modal-title">Edit current item below!</h5>
                 </div>
                 
                 {/* Modal body */}
@@ -150,18 +215,19 @@ class Seller extends Component {
                         onChange={this.handleChange}
                       />
                     </div>
-                    <button>Submit</button>
+                    <button className="btn bg-success">Submit</button>
                   </form>
                 </div>
                 
                 {/* Modal footer */}
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" className="btn bg-danger" data-dismiss="modal">Close</button>
                 </div>
                 
               </div>
             </div>
           </div>
+
         </div>
       </div>
     );
