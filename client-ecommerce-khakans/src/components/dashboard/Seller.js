@@ -171,21 +171,17 @@ class Seller extends Component {
           <div className="modal" id="myModaledit" style={{marginTop: "100px"}}>
             <div className="modal-dialog">
               <div className="modal-content">
-              
                 {/* Modal Header */}
                 <div className="modal-header">
                   <h5 className="modal-title">Edit current item below!</h5>
                 </div>
-                
                 {/* Modal body */}
                 <div className="modal-body">
-                  <form onSubmit={this.submit}>
+                  <form>
                     <div hidden>
                       <input 
                         type="text"
                         name="storeID"
-                        value={user.id}
-                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="form-input">
@@ -193,8 +189,6 @@ class Seller extends Component {
                         type="text"
                         name="name"
                         placeholder="Name of Product"
-                        value={this.state.name}
-                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="form-input">
@@ -202,8 +196,6 @@ class Seller extends Component {
                         type="number"
                         name="price"
                         placeholder="Price"
-                        value={this.state.price}
-                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="form-input">
@@ -211,14 +203,11 @@ class Seller extends Component {
                         type="number"
                         name="stock"
                         placeholder="Stock"
-                        value={this.state.stock}
-                        onChange={this.handleChange}
                       />
                     </div>
                     <button className="btn bg-success">Submit</button>
                   </form>
                 </div>
-                
                 {/* Modal footer */}
                 <div className="modal-footer">
                   <button type="button" className="btn bg-danger" data-dismiss="modal">Close</button>
